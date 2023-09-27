@@ -16,7 +16,7 @@
             android:exported="true"
             android:permission="com.fffffff.aidlserver.permission.MyService">
             <intent-filter>
-                <action android:name="com.fffffff.aidlserver.MY_SERVICE_CENTER" />
+                <action android:name="com.fffffff.aidlserver.action.MY_SERVICE_CENTER" />
             </intent-filter>
         </service>
 
