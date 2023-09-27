@@ -34,6 +34,7 @@ android {
 
 dependencies {
 
+    // 依赖 aar 包
     implementation(fileTree(mapOf(
         "dir" to "libs",
         "include" to listOf("*.aar", "*.jar"),

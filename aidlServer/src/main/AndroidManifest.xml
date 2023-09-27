@@ -1,17 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <!-- 自定义权限申明-->
     <permission android:name="com.fffffff.aidlserver.permission.MyService" />
 
     <application>
 
+        <!-- 定义 service -->
+        <!-- 应用自定义权限 -->
+        <!-- 定义隐式启动的 action -->
+        <!-- 设置 exported = true，可被外部调用 -->
         <service
             android:name=".MyService"
+            android:enabled="true"
             android:exported="true"
             android:permission="com.fffffff.aidlserver.permission.MyService">
             <intent-filter>
-                <action android:name="android.intent.action.MY_SERVICE_CENTER" />
-                <category android:name="android.intent.category.DEFAULT" />
+                <action android:name="com.fffffff.aidlserver.MY_SERVICE_CENTER" />
             </intent-filter>
         </service>
 
