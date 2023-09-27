@@ -4,9 +4,11 @@ import android.app.Service;
 import android.content.Intent;
 import android.os.IBinder;
 import android.os.RemoteException;
+
 import androidx.annotation.Nullable;
+
 import com.fffffff.aidllib.IMyTestAidlInterface;
-import com.fffffff.aidllib.IMyTestCallback;
+import com.fffffff.aidllib.MyCallback;
 
 /**
  * @Author: duke
@@ -16,13 +18,14 @@ import com.fffffff.aidllib.IMyTestCallback;
 public class MyService extends Service {
 
     private final IMyTestAidlInterface.Stub binderImpl = new IMyTestAidlInterface.Stub() {
+
         @Override
-        public void searchKeyWord(int i, String s, IMyTestCallback iMyTestCallback) throws RemoteException {
-            if (iMyTestCallback == null) {
+        public void searchKeyWord(int i, String s, MyCallback myCallback) throws RemoteException {
+            if (myCallback == null) {
                 return;
             }
             String result = String.valueOf(i) + "_" + s + "_服务端收到了，返回拼接结果给你！";
-            iMyTestCallback.onResult(result);
+            myCallback.onResult(result);
         }
     };
 
