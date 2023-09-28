@@ -16,3 +16,4 @@ dependencyResolutionManagement {
 rootProject.name = "AIDL_Server_test"
 include(":app")
 include(":aidlServer")
+include(":aidlLib")

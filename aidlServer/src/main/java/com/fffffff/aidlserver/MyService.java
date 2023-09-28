@@ -5,8 +5,8 @@ import android.content.Intent;
 import android.os.IBinder;
 import android.os.RemoteException;
 import androidx.annotation.Nullable;
-import com.fffffff.aidllib.IMyTestAidlInterface;
-import com.fffffff.aidllib.IMyTestCallback;
+import com.fffffff.aidl_server_test.IMyTestAidlInterface;
+import com.fffffff.aidl_server_test.IMyTestCallback;
 
 /**
  * @Author: duke
