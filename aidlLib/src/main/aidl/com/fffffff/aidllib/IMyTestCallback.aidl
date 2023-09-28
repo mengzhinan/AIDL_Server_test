@@ -9,7 +9,7 @@ interface IMyTestCallback {
      * Demonstrates some basic types that you can use as parameters
      * and return values in AIDL.
      */
-    void onResult(boolean isComplete, UserData userData);
+    void onResult(boolean isComplete, out UserData userData);
 
     void onFailure(String error);
 }

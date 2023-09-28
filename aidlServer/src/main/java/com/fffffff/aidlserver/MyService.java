@@ -3,10 +3,8 @@ package com.fffffff.aidlserver;
 import android.app.Service;
 import android.content.Intent;
 import android.os.IBinder;
-import android.os.RemoteException;
+
 import androidx.annotation.Nullable;
-import com.fffffff.aidl_server_test.IMyTestAidlInterface;
-import com.fffffff.aidl_server_test.IMyTestCallback;
 
 /**
  * @Author: duke
@@ -15,21 +13,17 @@ import com.fffffff.aidl_server_test.IMyTestCallback;
  */
 public class MyService extends Service {
 
-    private final IMyTestAidlInterface.Stub binderImpl = new IMyTestAidlInterface.Stub() {
+    private IMyTestAidlInterfaceSub myBinder;
 
-        @Override
-        public void searchKeyWord(int i, String s, IMyTestCallback iMyTestCallback) throws RemoteException {
-            if (iMyTestCallback == null) {
-                return;
-            }
-            String result = String.valueOf(i) + "_" + s + "_服务端收到了，返回拼接结果给你！";
-            iMyTestCallback.onResult(result);
-        }
-    };
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        myBinder = new IMyTestAidlInterfaceSub();
+    }
 
     @Nullable
     @Override
     public IBinder onBind(Intent intent) {
-        return binderImpl.asBinder();
+        return myBinder.asBinder();
     }
 }
