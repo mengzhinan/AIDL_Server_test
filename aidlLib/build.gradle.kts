@@ -41,10 +41,8 @@ android {
     }
 
     buildFeatures {
-
         // 如果 aidl 目录未变色/无法新建 aidl 文件，则需要配置这个
         aidl = true
-
     }
 }
 
