@@ -33,4 +33,9 @@ public class IMyTestAidlInterfaceSub extends IMyTestAidlInterface.Stub {
         userData.msg = result;
         iMyTestCallback.onResult(true, userData);
     }
+
+    @Override
+    public int addNum(int a, int b) throws RemoteException {
+        return a + b;
+    }
 }
