@@ -38,26 +38,12 @@ public class MyService extends Service {
                     e.printStackTrace();
                 }
 
-                for (int j = 0; j < 100; j++) {
-                    int finalJ = j;
-                    myHandler.postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
+                String result = String.valueOf(i) + "_" + s + "_服务端收到了，返回拼接结果给你！";
 
-                            String result = String.valueOf(i) + "_" + s + "_服务端收到了，返回拼接结果给你！";
-
-                            UserData userData = new UserData();
-                            userData.percentage = finalJ;
-                            userData.msg = result;
-                            try {
-                                iMyTestCallback.onResult(true, userData);
-                            } catch (RemoteException e) {
-                                e.printStackTrace();
-                            }
-
-                        }
-                    }, 100);
-                }
+                UserData userData = new UserData();
+                userData.percentage = i;
+                userData.msg = result;
+                iMyTestCallback.onResult(true, userData);
             }
 
             @Override
