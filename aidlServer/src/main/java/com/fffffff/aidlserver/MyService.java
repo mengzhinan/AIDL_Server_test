@@ -3,8 +3,13 @@ package com.fffffff.aidlserver;
 import android.app.Service;
 import android.content.Intent;
 import android.os.IBinder;
+import android.os.RemoteException;
 
 import androidx.annotation.Nullable;
+
+import com.fffffff.aidllib.IMyTestAidlInterface;
+import com.fffffff.aidllib.IMyTestCallback;
+import com.fffffff.aidllib.UserData;
 
 /**
  * @Author: duke
@@ -13,12 +18,42 @@ import androidx.annotation.Nullable;
  */
 public class MyService extends Service {
 
-    private IMyTestAidlInterfaceSub myBinder;
+    private IMyTestAidlInterface.Stub myBinder;
+
+    private void createMyBinder() {
+        myBinder = new IMyTestAidlInterface.Stub() {
+            @Override
+            public void searchKeyWord(int i, String s, IMyTestCallback iMyTestCallback) throws RemoteException {
+
+                try {
+                    // 模拟耗时操作
+                    Thread.sleep(3000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
+                if (iMyTestCallback == null) {
+                    return;
+                }
+                String result = String.valueOf(i) + "_" + s + "_服务端收到了，返回拼接结果给你！";
+
+                UserData userData = new UserData();
+                userData.percentage = i;
+                userData.msg = result;
+                iMyTestCallback.onResult(true, userData);
+            }
+
+            @Override
+            public int addNum(int a, int b) throws RemoteException {
+                return a + b;
+            }
+        };
+    }
 
     @Override
     public void onCreate() {
         super.onCreate();
-        myBinder = new IMyTestAidlInterfaceSub();
+        createMyBinder();
     }
 
     @Nullable
@@ -26,4 +61,6 @@ public class MyService extends Service {
     public IBinder onBind(Intent intent) {
         return myBinder.asBinder();
     }
+
+
 }
