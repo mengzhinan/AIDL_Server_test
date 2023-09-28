@@ -37,18 +37,20 @@ public class UserData implements Parcelable {
     }
 
     protected UserData(Parcel in) {
-        readFromParcel(in);
-    }
-
-    /**
-     * 手动添加此方法
-     *
-     * @param in in
-     */
-    public void readFromParcel(Parcel in) {
         percentage = in.readInt();
         msg = in.readString();
     }
+
+//    /**
+//     * 参数方向为 out or inout 时，才需要此方法
+//     * 手动添加此方法
+//     *
+//     * @param in in
+//     */
+//    public void readFromParcel(Parcel in) {
+//        percentage = in.readInt();
+//        msg = in.readString();
+//    }
 
     @Override
     public void writeToParcel(@NonNull Parcel dest, int flags) {

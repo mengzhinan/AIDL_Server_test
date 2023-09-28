@@ -31,13 +31,6 @@ public class MyService extends Service {
                     return;
                 }
 
-                try {
-                    // 模拟耗时操作
-                    Thread.sleep(3000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-
                 String result = String.valueOf(i) + "_" + s + "_服务端收到了，返回拼接结果给你！";
 
                 UserData userData = new UserData();
