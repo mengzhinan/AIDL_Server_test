@@ -32,6 +32,6 @@ public class MyService extends Service {
     @Nullable
     @Override
     public IBinder onBind(Intent intent) {
-        return binderImpl;
+        return binderImpl.asBinder();
     }
 }
