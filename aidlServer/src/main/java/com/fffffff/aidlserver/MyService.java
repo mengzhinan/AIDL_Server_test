@@ -43,7 +43,7 @@ public class MyService extends Service {
                 UserData userData = new UserData();
                 userData.percentage = i;
                 userData.msg = result;
-                iMyTestCallback.onResult(true, userData);
+                iMyTestCallback.onResult("服务端处理完毕", userData);
             }
 
             @Override
