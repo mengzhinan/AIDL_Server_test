@@ -2,7 +2,9 @@ package com.fffffff.aidlserver;
 
 import android.app.Service;
 import android.content.Intent;
+import android.os.Handler;
 import android.os.IBinder;
+import android.os.Looper;
 import android.os.RemoteException;
 
 import androidx.annotation.Nullable;
@@ -19,11 +21,15 @@ import com.fffffff.aidllib.UserData;
 public class MyService extends Service {
 
     private IMyTestAidlInterface.Stub myBinder;
+    private Handler myHandler = new Handler(Looper.getMainLooper());
 
     private void createMyBinder() {
         myBinder = new IMyTestAidlInterface.Stub() {
             @Override
             public void searchKeyWord(int i, String s, IMyTestCallback iMyTestCallback) throws RemoteException {
+                if (iMyTestCallback == null) {
+                    return;
+                }
 
                 try {
                     // 模拟耗时操作
@@ -32,15 +38,26 @@ public class MyService extends Service {
                     e.printStackTrace();
                 }
 
-                if (iMyTestCallback == null) {
-                    return;
-                }
-                String result = String.valueOf(i) + "_" + s + "_服务端收到了，返回拼接结果给你！";
+                for (int j = 0; j < 100; j++) {
+                    int finalJ = j;
+                    myHandler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
 
-                UserData userData = new UserData();
-                userData.percentage = i;
-                userData.msg = result;
-                iMyTestCallback.onResult(true, userData);
+                            String result = String.valueOf(i) + "_" + s + "_服务端收到了，返回拼接结果给你！";
+
+                            UserData userData = new UserData();
+                            userData.percentage = finalJ;
+                            userData.msg = result;
+                            try {
+                                iMyTestCallback.onResult(true, userData);
+                            } catch (RemoteException e) {
+                                e.printStackTrace();
+                            }
+
+                        }
+                    }, 100);
+                }
             }
 
             @Override
